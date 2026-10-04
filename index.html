@@ -1,280 +1,93 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rajesh | Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">Rajesh</a>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
 
-/* ===== Reset & Base ===== */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Hi, I'm <span class="highlight">Rajesh</span> 👋</h1>
+        <p>Hardware Compute Engineer | Amazon</p>
+        <a href="#projects" class="btn">View My Work</a>
+    </section>
 
-body {
-    font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
-    line-height: 1.7;
-    color: #2d2d2d;
-    background-color: #fafafa;
-}
+    <!-- About Section -->
+    <section id="about" class="section">
+        <h2>About Me</h2>
+        <p>
+            I'm a hardware compute engineer with experience at Amazon and Qualcomm.
+            I'm passionate about building high-performance computing solutions
+            and love exploring new technologies.
+        </p>
+    </section>
 
-a {
-    text-decoration: none;
-    color: inherit;
-}
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+        <h2>Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-card">SystemVerilog</div>
+            <div class="skill-card">RTL Design</div>
+            <div class="skill-card">HPC</div>
+            <div class="skill-card">FPGA</div>
+            <div class="skill-card">Python</div>
+            <div class="skill-card">Linux</div>
+        </div>
+    </section>
 
-/* ===== Navigation ===== */
-nav {
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(12px);
-    padding: 1.2rem 2rem;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-    border-bottom: 1px solid #eee;
-}
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <h2>Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <h3>Project 1</h3>
+                <p>Brief description of your project goes here.</p>
+                <a href="#" class="btn-small">View Details</a>
+            </div>
+            <div class="project-card">
+                <h3>Project 2</h3>
+                <p>Brief description of your project goes here.</p>
+                <a href="#" class="btn-small">View Details</a>
+            </div>
+            <div class="project-card">
+                <h3>Project 3</h3>
+                <p>Brief description of your project goes here.</p>
+                <a href="#" class="btn-small">View Details</a>
+            </div>
+        </div>
+    </section>
 
-.nav-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 900px;
-    margin: auto;
-}
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <h2>Contact</h2>
+        <p>Feel free to reach out!</p>
+        <div class="contact-links">
+            <a href="mailto:your.email@example.com">📧 Email</a>
+            <a href="https://linkedin.com/in/yourprofile">💼 LinkedIn</a>
+            <a href="https://github.com/yourusername">🐙 GitHub</a>
+        </div>
+    </section>
 
-.logo {
-    font-size: 1.3rem;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 2rem;
-}
-
-nav ul li a {
-    color: #888;
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: color 0.3s;
-}
-
-nav ul li a:hover {
-    color: #2d2d2d;
-}
-
-/* ===== Hero Section ===== */
-.hero {
-    text-align: center;
-    padding: 12rem 2rem 6rem;
-    background: #fff;
-}
-
-.hero h1 {
-    font-size: 2.8rem;
-    font-weight: 700;
-    letter-spacing: -1px;
-    margin-bottom: 0.8rem;
-}
-
-.highlight {
-    background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.hero p {
-    font-size: 1.1rem;
-    color: #888;
-    margin-bottom: 2.5rem;
-}
-
-.btn {
-    background: #2d2d2d;
-    color: #fff;
-    padding: 0.75rem 2rem;
-    border-radius: 50px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: all 0.3s;
-}
-
-.btn:hover {
-    background: #555;
-    transform: translateY(-2px);
-}
-
-/* ===== Sections ===== */
-.section {
-    max-width: 900px;
-    margin: auto;
-    padding: 5rem 2rem;
-}
-
-.section h2 {
-    font-size: 1.6rem;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-    margin-bottom: 0.5rem;
-}
-
-.section h2::after {
-    content: '';
-    display: block;
-    width: 40px;
-    height: 3px;
-    background: linear-gradient(120deg, #a8edea, #fed6e3);
-    margin-top: 0.5rem;
-    margin-bottom: 1.5rem;
-    border-radius: 2px;
-}
-
-.section p {
-    color: #666;
-    font-size: 1rem;
-    max-width: 600px;
-}
-
-/* ===== Skills Grid ===== */
-.skills-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    margin-top: 1.5rem;
-}
-
-.skill-card {
-    background: #fff;
-    border: 1px solid #eee;
-    padding: 0.6rem 1.4rem;
-    border-radius: 50px;
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: #555;
-    transition: all 0.3s;
-}
-
-.skill-card:hover {
-    border-color: #2d2d2d;
-    color: #2d2d2d;
-    transform: translateY(-2px);
-}
-
-/* ===== Projects Grid ===== */
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1.5rem;
-    margin-top: 1.5rem;
-}
-
-.project-card {
-    background: #fff;
-    padding: 2rem;
-    border-radius: 12px;
-    border: 1px solid #eee;
-    transition: all 0.3s;
-}
-
-.project-card:hover {
-    border-color: #ccc;
-    transform: translateY(-4px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
-}
-
-.project-card h3 {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-}
-
-.project-card p {
-    font-size: 0.9rem;
-    color: #888;
-}
-
-.btn-small {
-    display: inline-block;
-    margin-top: 1rem;
-    color: #2d2d2d;
-    font-size: 0.85rem;
-    font-weight: 600;
-    border-bottom: 2px solid #2d2d2d;
-    padding-bottom: 2px;
-    transition: all 0.3s;
-}
-
-.btn-small:hover {
-    color: #888;
-    border-color: #888;
-}
-
-/* ===== Contact ===== */
-.contact-links {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1.5rem;
-    flex-wrap: wrap;
-}
-
-.contact-links a {
-    background: #fff;
-    border: 1px solid #eee;
-    padding: 0.7rem 1.5rem;
-    border-radius: 50px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: all 0.3s;
-}
-
-.contact-links a:hover {
-    border-color: #2d2d2d;
-    transform: translateY(-2px);
-}
-
-/* ===== Footer ===== */
-footer {
-    text-align: center;
-    padding: 2rem;
-    color: #bbb;
-    font-size: 0.85rem;
-    border-top: 1px solid #eee;
-    margin-top: 2rem;
-}
-
-/* ===== Smooth Scroll ===== */
-html {
-    scroll-behavior: smooth;
-}
-
-/* ===== Responsive ===== */
-@media (max-width: 768px) {
-    .hero h1 {
-        font-size: 2rem;
-    }
-
-    .hero {
-        padding: 9rem 1.5rem 4rem;
-    }
-
-    nav ul {
-        gap: 1.2rem;
-    }
-
-    nav ul li a {
-        font-size: 0.8rem;
-    }
-
-    .section {
-        padding: 3.5rem 1.5rem;
-    }
-
-    .contact-links {
-        flex-direction: column;
-    }
-
-    .projects-grid {
-        grid-template-columns: 1fr;
-    }
-}
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Rajesh. All rights reserved.</p>
+    </footer>
+</body>
+</html>
 
