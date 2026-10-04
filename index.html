@@ -55,25 +55,20 @@
     .shell { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
 
     /* intro / hero */
-    .intro {
-      display: grid; grid-template-columns: 150px 1fr; gap: 34px;
-      padding: 56px 36px 44px; align-items: start;
-      margin-top: 20px; border-radius: 20px;
-      background:
-        radial-gradient(1200px 300px at 0% 0%, rgba(124,58,237,0.10), transparent 60%),
-        radial-gradient(1000px 300px at 100% 0%, rgba(229,57,138,0.10), transparent 55%),
-        linear-gradient(135deg, rgba(15,111,222,0.08), rgba(20,163,127,0.08));
-      border: 1px solid var(--line);
-    }
+    .intro { display: grid; grid-template-columns: 210px 1fr; gap: 40px; padding: 56px 0 44px; align-items: start; }
     .photo {
-      width: 150px; height: 150px; border-radius: 50%;
-      background: linear-gradient(135deg, var(--brand), var(--violet) 45%, var(--pink));
+      width: 210px; height: 210px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--brand), var(--accent));
       display: grid; place-items: center; color: #fff;
-      font-family: var(--serif); font-size: 3rem; font-weight: 600;
-      box-shadow: 0 10px 30px rgba(124,58,237,0.35);
-      outline: 4px solid #fff; outline-offset: -4px;
-      border: 3px solid transparent;
+      font-family: var(--serif); font-size: 4.2rem; font-weight: 600;
+      box-shadow: 0 8px 24px rgba(15,111,222,0.25);
+      /* coloured ring around the photo */
+      border: 4px solid #fff;
+      outline: 3px solid var(--brand);
+      outline-offset: 1px;
     }
+    /* when it's a real image, fill the circle neatly without distortion */
+    img.photo { object-fit: cover; background: #fff; }
     .intro h1 { font-family: var(--serif); font-size: 2rem; font-weight: 600; margin-bottom: 4px; }
     .intro .role { color: var(--brand); font-weight: 600; margin-bottom: 16px; }
     .intro p { color: var(--ink); margin-bottom: 14px; }
@@ -82,21 +77,7 @@
     .intro .links a:hover { border-color: var(--brand); color: var(--brand); text-decoration: none; }
 
     section { padding: 40px 0; border-top: 1px solid var(--line); }
-    h2 {
-      font-family: var(--serif); font-size: 1.5rem; font-weight: 600; margin-bottom: 8px;
-      padding-left: 14px; position: relative;
-    }
-    h2::before {
-      content: ""; position: absolute; left: 0; top: 4px; bottom: 4px;
-      width: 5px; border-radius: 3px; background: var(--brand);
-    }
-    /* each section gets its own accent colour on the heading bar */
-    #highlights h2::before { background: var(--brand); }
-    #interests  h2::before { background: var(--violet); }
-    #education  h2::before { background: var(--pink); }
-    #experience h2::before { background: var(--amber); }
-    #projects   h2::before { background: var(--teal); }
-    #contact    h2::before { background: var(--accent); }
+    h2 { font-family: var(--serif); font-size: 1.5rem; font-weight: 600; margin-bottom: 8px; }
     .sub { color: var(--muted); margin-bottom: 22px; }
 
     /* two-column layout for highlights + sidebar */
@@ -104,72 +85,45 @@
 
     /* timeline (news & highlights) */
     .timeline { position: relative; padding-left: 22px; }
-    .timeline::before { content: ""; position: absolute; left: 6px; top: 6px; bottom: 6px; width: 3px; border-radius: 3px; background: linear-gradient(var(--brand), var(--violet), var(--pink), var(--amber), var(--accent)); }
+    .timeline::before { content: ""; position: absolute; left: 6px; top: 6px; bottom: 6px; width: 2px; background: var(--line); }
     .tl-row { position: relative; padding: 0 0 20px 20px; }
-    .tl-row::before { content: ""; position: absolute; left: -2px; top: 8px; width: 11px; height: 11px; border-radius: 50%; background: var(--brand); border: 2px solid #fff; box-shadow: 0 0 0 2px var(--brand); }
-    /* cycle dot colours down the timeline */
-    .tl-row:nth-child(5n+1)::before { background: var(--brand);  box-shadow: 0 0 0 2px var(--brand); }
-    .tl-row:nth-child(5n+2)::before { background: var(--violet); box-shadow: 0 0 0 2px var(--violet); }
-    .tl-row:nth-child(5n+3)::before { background: var(--pink);   box-shadow: 0 0 0 2px var(--pink); }
-    .tl-row:nth-child(5n+4)::before { background: var(--amber);  box-shadow: 0 0 0 2px var(--amber); }
-    .tl-row:nth-child(5n+5)::before { background: var(--accent); box-shadow: 0 0 0 2px var(--accent); }
-    .tl-date { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--pink); }
+    .tl-row::before { content: ""; position: absolute; left: -2px; top: 8px; width: 10px; height: 10px; border-radius: 50%; background: var(--brand); border: 2px solid #fff; box-shadow: 0 0 0 2px var(--brand); }
+    .tl-date { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--accent); }
     .tl-text { color: var(--ink); }
 
-    /* sidebar cards — each with its own tint + coloured left border */
-    .side-card { background: var(--soft); border: 1px solid var(--line); border-left: 4px solid var(--brand); border-radius: 12px; padding: 20px 22px; margin-bottom: 20px; }
-    .side-card:nth-of-type(1) { border-left-color: var(--violet); background: linear-gradient(135deg, rgba(124,58,237,0.08), transparent 70%); }
-    .side-card:nth-of-type(2) { border-left-color: var(--amber);  background: linear-gradient(135deg, rgba(245,158,11,0.09), transparent 70%); }
+    /* sidebar cards */
+    .side-card { background: var(--soft); border: 1px solid var(--line); border-radius: 12px; padding: 20px 22px; margin-bottom: 20px; }
     .side-card h3 { font-family: var(--serif); font-size: 1.15rem; margin-bottom: 12px; }
     .side-card ul { list-style: none; }
     .side-card li { color: var(--muted); padding-left: 18px; position: relative; margin-bottom: 6px; }
-    .side-card li::before { content: "▸"; position: absolute; left: 0; color: var(--pink); }
-    /* interests cards (inside #interests) get a different tint pair */
-    #interests .side-card:nth-of-type(1) { border-left-color: var(--brand); background: linear-gradient(135deg, rgba(15,111,222,0.08), transparent 70%); }
-    #interests .side-card:nth-of-type(2) { border-left-color: var(--teal);  background: linear-gradient(135deg, rgba(13,148,136,0.09), transparent 70%); }
-    #interests .side-card li::before { color: var(--teal); }
+    .side-card li::before { content: "▸"; position: absolute; left: 0; color: var(--brand); }
 
     /* education / experience table */
     table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
     th, td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
-    th { font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; color: #fff; background: linear-gradient(135deg, var(--pink), var(--violet)); }
-    th:first-child { border-top-left-radius: 10px; }
-    th:last-child { border-top-right-radius: 10px; }
-    tbody tr:hover { background: rgba(229,57,138,0.05); }
+    th { font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); background: var(--soft); }
     td strong { color: var(--ink); }
-    .when { color: var(--pink); font-weight: 600; white-space: nowrap; }
+    .when { color: var(--accent); font-weight: 600; white-space: nowrap; }
 
     /* experience list */
     .exp { border-bottom: 1px solid var(--line); padding: 20px 0; }
     .exp:last-child { border-bottom: none; }
     .exp .top { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline; }
     .exp h3 { font-family: var(--serif); font-size: 1.2rem; }
-    .exp .co { color: var(--amber); font-weight: 600; margin: 2px 0 10px; }
+    .exp .co { color: var(--brand); font-weight: 600; margin: 2px 0 10px; }
     .exp ul { list-style: none; }
     .exp li { color: var(--muted); padding-left: 20px; position: relative; margin-bottom: 6px; }
-    .exp li::before { content: "–"; position: absolute; left: 0; color: var(--amber); }
+    .exp li::before { content: "–"; position: absolute; left: 0; color: var(--accent); }
 
-    /* projects — colourful cards with a top accent bar, colour cycles */
+    /* projects */
     .pgrid { display: grid; grid-template-columns: repeat(2,1fr); gap: 18px; }
-    .pcard {
-      --c: var(--brand);
-      position: relative; border: 1px solid var(--line); border-radius: 12px;
-      padding: 24px 20px 20px; overflow: hidden; background: #fff;
-      transition: box-shadow .2s, transform .2s, border-color .2s;
-    }
-    .pcard::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 6px; background: var(--c); }
-    .pcard:nth-child(6n+1) { --c: var(--brand); }
-    .pcard:nth-child(6n+2) { --c: var(--violet); }
-    .pcard:nth-child(6n+3) { --c: var(--pink); }
-    .pcard:nth-child(6n+4) { --c: var(--amber); }
-    .pcard:nth-child(6n+5) { --c: var(--teal); }
-    .pcard:nth-child(6n+6) { --c: var(--accent); }
-    .pcard:hover { box-shadow: 0 14px 34px rgba(26,35,50,0.12); transform: translateY(-4px); border-color: var(--c); }
+    .pcard { border: 1px solid var(--line); border-radius: 12px; padding: 20px; transition: box-shadow .2s, transform .2s; }
+    .pcard:hover { box-shadow: 0 10px 30px rgba(26,35,50,0.08); transform: translateY(-3px); }
     .pcard h3 { font-family: var(--serif); font-size: 1.15rem; margin-bottom: 6px; }
     .pcard p { color: var(--muted); font-size: 0.95rem; }
-    .pcard .yr { color: var(--c); font-weight: 700; font-size: 0.85rem; }
+    .pcard .yr { color: var(--accent); font-weight: 600; font-size: 0.85rem; }
 
-    .contact-box { background: linear-gradient(135deg, rgba(124,58,237,0.10), rgba(229,57,138,0.10) 50%, rgba(20,163,127,0.10)); border: 1px solid var(--line); border-radius: 14px; padding: 30px; text-align: center; }
+    .contact-box { background: linear-gradient(135deg, #0f6fde0d, #14a37f0d); border: 1px solid var(--line); border-radius: 14px; padding: 30px; text-align: center; }
     .contact-box a.mail { font-family: var(--serif); font-size: clamp(1.3rem, 4vw, 1.9rem); }
     footer { padding: 30px 24px 48px; text-align: center; color: var(--muted); font-size: 0.85rem; }
 
@@ -179,7 +133,7 @@
       .nav nav { display: none; }
     }
     @media (max-width: 560px) {
-      .intro { grid-template-columns: 1fr; justify-items: center; text-align: center; padding: 40px 20px 36px; }
+      .intro { grid-template-columns: 1fr; justify-items: center; text-align: center; }
       .intro .links { justify-content: center; }
       table, thead, tbody, th, td, tr { display: block; }
       thead { display: none; }
@@ -207,7 +161,9 @@
   <div class="shell">
     <!-- INTRO -->
     <section class="intro" id="home" style="border-top:none;">
-      <div class="photo" aria-hidden="true">RK</div>
+      <!-- Put your photo file (e.g. profile.jpg) in this same folder. -->
+      <img class="photo" src="profile.jpg" alt="Rajesh Kumar"
+           onerror="this.outerHTML='&lt;div class=\'photo\' aria-hidden=\'true\'&gt;RK&lt;/div&gt;'" />
       <div>
         <h1>Rajesh Kumar</h1>
         <p class="role">ASIC Verification Engineer · Bangalore, India</p>
@@ -221,14 +177,18 @@
           Gandhinagar (CPI 8.82) and a B.Tech in Electronics from Tezpur
           University. My verification work spans video codec IPs — APV, VVC,
           H.265/264, and AV1 — along with high-speed protocols and SoC
-          subsystems for Security, Clock and Reset blocks.
+          subsystems for Security, Clock &amp; Reset, and Always-On blocks.
         </p>
         <p>
-          🔬 I've been exploring LLM-based techniques and Agentic AI speed up Design Verification cycle for Soc &amp IP. Let's connect further for collaborations.
+          🔬 I specialize in UVM / SystemVerilog testbench development,
+          constrained-random and formal coverage closure (JasperGold), and
+          X-prop verification. I've uncovered multiple critical RTL and C-model
+          bugs, and I've been exploring LLM-based stimulus generation to make
+          coverage closure faster.
         </p>
         <p>
           💡 Beyond the testbench, I enjoy mentoring new engineers, improving
-          team automation, and the occasional RTL design and tapeout project. Apart from work, You will see me on bike rides and Badminton touraments.
+          team automation, and the occasional RTL design and tapeout project.
         </p>
         <div class="links">
           <a href="mailto:rajesh.pandit931@gmail.com">✉ rajesh.pandit931@gmail.com</a>
