@@ -1,409 +1,388 @@
 <!DOCTYPE html>
 <!--
-  Personal Portfolio — Rajesh Kumar, ASIC Verification Engineer.
-  Original work, released under the MIT License (see LICENSE).
-  Fonts: Google Fonts (SIL Open Font License). Icons: inline SVG, hand-authored.
-  No third-party templates, stock images, or proprietary assets are used.
+  Portfolio Design 5 — "Academic" theme, layout inspired by kailashprasad.com
+  (structure/sections only; all content is Rajesh Kumar's own, original code).
+  MIT License. Fonts: Google Fonts (OFL). Self-contained, no external assets.
 -->
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Portfolio of Rajesh Kumar — ASIC / VLSI Verification Engineer with 5+ years in UVM, SystemVerilog, and video codec IP verification." />
+  <meta name="description" content="Rajesh Kumar — ASIC / VLSI Verification Engineer. 5+ years in UVM, SystemVerilog, video codec IP verification." />
   <title>Rajesh Kumar — ASIC Verification Engineer</title>
-
-  <!-- Google Fonts: Inter + Space Grotesk (Open Font License) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #ffffff;
+      --soft: #f4f6f9;
+      --ink: #1a2332;
+      --muted: #5b6676;
+      --line: #e4e8ef;
+      --brand: #0f6fde;
+      --brand-dark: #0a5bb8;
+      --accent: #14a37f;
+      /* extra accent colours for variety */
+      --violet: #7c3aed;
+      --pink: #e5398a;
+      --amber: #f59e0b;
+      --teal: #0d9488;
+      --rainbow: linear-gradient(90deg, #0f6fde, #7c3aed, #e5398a, #f59e0b, #14a37f);
+      --serif: "Lora", Georgia, serif;
+      --sans: "Inter", -apple-system, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--ink); font-family: var(--sans); line-height: 1.75; -webkit-font-smoothing: antialiased; }
+    /* colourful gradient strip across the very top of the page */
+    body::before { content: ""; position: fixed; top: 0; left: 0; right: 0; height: 4px; background: var(--rainbow); z-index: 50; }
+    a { color: var(--brand); text-decoration: none; }
+    a:hover { text-decoration: underline; }
 
-  <link rel="stylesheet" href="style.css" />
+    /* top nav */
+    header {
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(255,255,255,0.9); backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav { max-width: 1080px; margin: 0 auto; padding: 14px 24px; display: flex; justify-content: space-between; align-items: center; }
+    .brand { font-family: var(--serif); font-weight: 600; font-size: 1.15rem; color: var(--ink); }
+    .nav nav { display: flex; gap: 22px; font-size: 0.92rem; }
+    .nav nav a { color: var(--muted); }
+    .nav nav a:hover { color: var(--brand); text-decoration: none; }
+
+    .shell { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+    /* intro / hero */
+    .intro {
+      display: grid; grid-template-columns: 150px 1fr; gap: 34px;
+      padding: 56px 36px 44px; align-items: start;
+      margin-top: 20px; border-radius: 20px;
+      background:
+        radial-gradient(1200px 300px at 0% 0%, rgba(124,58,237,0.10), transparent 60%),
+        radial-gradient(1000px 300px at 100% 0%, rgba(229,57,138,0.10), transparent 55%),
+        linear-gradient(135deg, rgba(15,111,222,0.08), rgba(20,163,127,0.08));
+      border: 1px solid var(--line);
+    }
+    .photo {
+      width: 150px; height: 150px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--brand), var(--violet) 45%, var(--pink));
+      display: grid; place-items: center; color: #fff;
+      font-family: var(--serif); font-size: 3rem; font-weight: 600;
+      box-shadow: 0 10px 30px rgba(124,58,237,0.35);
+      outline: 4px solid #fff; outline-offset: -4px;
+      border: 3px solid transparent;
+    }
+    .intro h1 { font-family: var(--serif); font-size: 2rem; font-weight: 600; margin-bottom: 4px; }
+    .intro .role { color: var(--brand); font-weight: 600; margin-bottom: 16px; }
+    .intro p { color: var(--ink); margin-bottom: 14px; }
+    .intro .links { margin-top: 10px; display: flex; gap: 14px; flex-wrap: wrap; font-size: 0.92rem; }
+    .intro .links a { display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border: 1px solid var(--line); border-radius: 8px; color: var(--ink); background: var(--soft); }
+    .intro .links a:hover { border-color: var(--brand); color: var(--brand); text-decoration: none; }
+
+    section { padding: 40px 0; border-top: 1px solid var(--line); }
+    h2 {
+      font-family: var(--serif); font-size: 1.5rem; font-weight: 600; margin-bottom: 8px;
+      padding-left: 14px; position: relative;
+    }
+    h2::before {
+      content: ""; position: absolute; left: 0; top: 4px; bottom: 4px;
+      width: 5px; border-radius: 3px; background: var(--brand);
+    }
+    /* each section gets its own accent colour on the heading bar */
+    #highlights h2::before { background: var(--brand); }
+    #interests  h2::before { background: var(--violet); }
+    #education  h2::before { background: var(--pink); }
+    #experience h2::before { background: var(--amber); }
+    #projects   h2::before { background: var(--teal); }
+    #contact    h2::before { background: var(--accent); }
+    .sub { color: var(--muted); margin-bottom: 22px; }
+
+    /* two-column layout for highlights + sidebar */
+    .cols { display: grid; grid-template-columns: 1.6fr 1fr; gap: 40px; align-items: start; }
+
+    /* timeline (news & highlights) */
+    .timeline { position: relative; padding-left: 22px; }
+    .timeline::before { content: ""; position: absolute; left: 6px; top: 6px; bottom: 6px; width: 3px; border-radius: 3px; background: linear-gradient(var(--brand), var(--violet), var(--pink), var(--amber), var(--accent)); }
+    .tl-row { position: relative; padding: 0 0 20px 20px; }
+    .tl-row::before { content: ""; position: absolute; left: -2px; top: 8px; width: 11px; height: 11px; border-radius: 50%; background: var(--brand); border: 2px solid #fff; box-shadow: 0 0 0 2px var(--brand); }
+    /* cycle dot colours down the timeline */
+    .tl-row:nth-child(5n+1)::before { background: var(--brand);  box-shadow: 0 0 0 2px var(--brand); }
+    .tl-row:nth-child(5n+2)::before { background: var(--violet); box-shadow: 0 0 0 2px var(--violet); }
+    .tl-row:nth-child(5n+3)::before { background: var(--pink);   box-shadow: 0 0 0 2px var(--pink); }
+    .tl-row:nth-child(5n+4)::before { background: var(--amber);  box-shadow: 0 0 0 2px var(--amber); }
+    .tl-row:nth-child(5n+5)::before { background: var(--accent); box-shadow: 0 0 0 2px var(--accent); }
+    .tl-date { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--pink); }
+    .tl-text { color: var(--ink); }
+
+    /* sidebar cards — each with its own tint + coloured left border */
+    .side-card { background: var(--soft); border: 1px solid var(--line); border-left: 4px solid var(--brand); border-radius: 12px; padding: 20px 22px; margin-bottom: 20px; }
+    .side-card:nth-of-type(1) { border-left-color: var(--violet); background: linear-gradient(135deg, rgba(124,58,237,0.08), transparent 70%); }
+    .side-card:nth-of-type(2) { border-left-color: var(--amber);  background: linear-gradient(135deg, rgba(245,158,11,0.09), transparent 70%); }
+    .side-card h3 { font-family: var(--serif); font-size: 1.15rem; margin-bottom: 12px; }
+    .side-card ul { list-style: none; }
+    .side-card li { color: var(--muted); padding-left: 18px; position: relative; margin-bottom: 6px; }
+    .side-card li::before { content: "▸"; position: absolute; left: 0; color: var(--pink); }
+    /* interests cards (inside #interests) get a different tint pair */
+    #interests .side-card:nth-of-type(1) { border-left-color: var(--brand); background: linear-gradient(135deg, rgba(15,111,222,0.08), transparent 70%); }
+    #interests .side-card:nth-of-type(2) { border-left-color: var(--teal);  background: linear-gradient(135deg, rgba(13,148,136,0.09), transparent 70%); }
+    #interests .side-card li::before { color: var(--teal); }
+
+    /* education / experience table */
+    table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+    th, td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; color: #fff; background: linear-gradient(135deg, var(--pink), var(--violet)); }
+    th:first-child { border-top-left-radius: 10px; }
+    th:last-child { border-top-right-radius: 10px; }
+    tbody tr:hover { background: rgba(229,57,138,0.05); }
+    td strong { color: var(--ink); }
+    .when { color: var(--pink); font-weight: 600; white-space: nowrap; }
+
+    /* experience list */
+    .exp { border-bottom: 1px solid var(--line); padding: 20px 0; }
+    .exp:last-child { border-bottom: none; }
+    .exp .top { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline; }
+    .exp h3 { font-family: var(--serif); font-size: 1.2rem; }
+    .exp .co { color: var(--amber); font-weight: 600; margin: 2px 0 10px; }
+    .exp ul { list-style: none; }
+    .exp li { color: var(--muted); padding-left: 20px; position: relative; margin-bottom: 6px; }
+    .exp li::before { content: "–"; position: absolute; left: 0; color: var(--amber); }
+
+    /* projects — colourful cards with a top accent bar, colour cycles */
+    .pgrid { display: grid; grid-template-columns: repeat(2,1fr); gap: 18px; }
+    .pcard {
+      --c: var(--brand);
+      position: relative; border: 1px solid var(--line); border-radius: 12px;
+      padding: 24px 20px 20px; overflow: hidden; background: #fff;
+      transition: box-shadow .2s, transform .2s, border-color .2s;
+    }
+    .pcard::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 6px; background: var(--c); }
+    .pcard:nth-child(6n+1) { --c: var(--brand); }
+    .pcard:nth-child(6n+2) { --c: var(--violet); }
+    .pcard:nth-child(6n+3) { --c: var(--pink); }
+    .pcard:nth-child(6n+4) { --c: var(--amber); }
+    .pcard:nth-child(6n+5) { --c: var(--teal); }
+    .pcard:nth-child(6n+6) { --c: var(--accent); }
+    .pcard:hover { box-shadow: 0 14px 34px rgba(26,35,50,0.12); transform: translateY(-4px); border-color: var(--c); }
+    .pcard h3 { font-family: var(--serif); font-size: 1.15rem; margin-bottom: 6px; }
+    .pcard p { color: var(--muted); font-size: 0.95rem; }
+    .pcard .yr { color: var(--c); font-weight: 700; font-size: 0.85rem; }
+
+    .contact-box { background: linear-gradient(135deg, rgba(124,58,237,0.10), rgba(229,57,138,0.10) 50%, rgba(20,163,127,0.10)); border: 1px solid var(--line); border-radius: 14px; padding: 30px; text-align: center; }
+    .contact-box a.mail { font-family: var(--serif); font-size: clamp(1.3rem, 4vw, 1.9rem); }
+    footer { padding: 30px 24px 48px; text-align: center; color: var(--muted); font-size: 0.85rem; }
+
+    @media (max-width: 820px) {
+      .cols { grid-template-columns: 1fr; }
+      .pgrid { grid-template-columns: 1fr; }
+      .nav nav { display: none; }
+    }
+    @media (max-width: 560px) {
+      .intro { grid-template-columns: 1fr; justify-items: center; text-align: center; padding: 40px 20px 36px; }
+      .intro .links { justify-content: center; }
+      table, thead, tbody, th, td, tr { display: block; }
+      thead { display: none; }
+      td { border: none; padding: 2px 0; }
+      .exp td { padding: 2px 0; }
+      tr { border-bottom: 1px solid var(--line); padding: 12px 0; }
+    }
+  </style>
 </head>
 <body>
-  <!-- Decorative animated background blobs -->
-  <div class="bg-decor" aria-hidden="true">
-    <span class="blob blob-1"></span>
-    <span class="blob blob-2"></span>
-    <span class="blob blob-3"></span>
-  </div>
-
-  <!-- ============ NAVBAR ============ -->
-  <header class="nav glass">
-    <a href="#home" class="logo">
-      <span class="logo-mark">&lt;/&gt;</span>
-      <span class="logo-text">rajesh.k</span>
-    </a>
-
-    <nav class="nav-links" aria-label="Primary">
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#experience">Experience</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
-    </nav>
-
-    <div class="nav-actions">
-      <button id="themeToggle" class="icon-btn" aria-label="Toggle color theme" title="Toggle theme">
-        <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-          <circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
-        </svg>
-        <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
-        </svg>
-      </button>
-      <a href="#contact" class="btn btn-primary btn-sm">Let's talk</a>
-      <button id="menuToggle" class="icon-btn menu-only" aria-label="Open menu" aria-expanded="false">
-        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
-      </button>
+  <header>
+    <div class="nav">
+      <a href="#home" class="brand">Rajesh Kumar</a>
+      <nav>
+        <a href="#highlights">Highlights</a>
+        <a href="#interests">Interests</a>
+        <a href="#education">Education</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
     </div>
   </header>
 
-  <main>
-    <!-- ============ HERO ============ -->
-    <section id="home" class="hero">
-      <div class="hero-text">
-        <p class="eyebrow">
-          <span class="status-dot"></span> ASIC / VLSI Verification · Bangalore, India
+  <div class="shell">
+    <!-- INTRO -->
+    <section class="intro" id="home" style="border-top:none;">
+      <div class="photo" aria-hidden="true">RK</div>
+      <div>
+        <h1>Rajesh Kumar</h1>
+        <p class="role">ASIC Verification Engineer · Bangalore, India</p>
+        <p>
+          👋 Hello, I'm Rajesh — an ASIC verification engineer with 5+ years of
+          experience building UVM testbenches, closing coverage, and finding the
+          bugs that matter before a design reaches tapeout.
         </p>
-        <h1>
-          Hi, I'm <span class="gradient-text">Rajesh Kumar</span>.<br />
-          I verify silicon before it ships.
-        </h1>
-        <p class="lead">
-          ASIC verification engineer with 5+ years building UVM testbenches,
-          closing coverage, and hunting down bugs across video codec IPs,
-          high-speed protocols, and SoC subsystems.
+        <p>
+          🎓 I hold an M.Tech in Microelectronics &amp; VLSI Design from IIT
+          Gandhinagar (CPI 8.82) and a B.Tech in Electronics from Tezpur
+          University. My verification work spans video codec IPs — APV, VVC,
+          H.265/264, and AV1 — along with high-speed protocols and SoC
+          subsystems for Security, Clock &amp; Reset, and Always-On blocks.
         </p>
-
-        <div class="hero-cta">
-          <a href="#projects" class="btn btn-primary">View my work</a>
-          <a href="#" class="btn btn-ghost" id="resumeBtn">Download CV</a>
-        </div>
-
-        <div class="hero-socials" aria-label="Social links">
-          <a href="https://www.linkedin.com/" aria-label="LinkedIn" class="icon-btn">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM10 9h3.8v1.6h.1c.5-1 1.8-2 3.7-2 4 0 4.7 2.6 4.7 6V21h-4v-5.3c0-1.3 0-2.9-1.8-2.9s-2 1.4-2 2.8V21h-4z"/></svg>
-          </a>
-          <a href="https://github.com/" aria-label="GitHub" class="icon-btn">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.3-1.8-1.3-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5z"/></svg>
-          </a>
-          <a href="mailto:rajesh.pandit931@gmail.com" aria-label="Email" class="icon-btn">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
-          </a>
+        <p>
+          🔬 I specialize in UVM / SystemVerilog testbench development,
+          constrained-random and formal coverage closure (JasperGold), and
+          X-prop verification. I've uncovered multiple critical RTL and C-model
+          bugs, and I've been exploring LLM-based stimulus generation to make
+          coverage closure faster.
+        </p>
+        <p>
+          💡 Beyond the testbench, I enjoy mentoring new engineers, improving
+          team automation, and the occasional RTL design and tapeout project.
+        </p>
+        <div class="links">
+          <a href="mailto:rajesh.pandit931@gmail.com">✉ rajesh.pandit931@gmail.com</a>
+          <a href="tel:+919954688170">📞 +91 99546 88170</a>
+          <a href="https://www.linkedin.com/">in LinkedIn</a>
+          <a href="https://github.com/">GitHub</a>
         </div>
       </div>
+    </section>
 
-      <div class="hero-card glass">
-        <div class="avatar" aria-hidden="true">
-          <!-- Drop your own photo here: replace with <img src="me.jpg" alt="Rajesh Kumar"> -->
-          <span>RK</span>
+    <!-- NEWS & HIGHLIGHTS -->
+    <section id="highlights">
+      <h2>News &amp; Highlights</h2>
+      <p class="sub">A timeline of roles, milestones, and recognitions.</p>
+      <div class="cols">
+        <div class="timeline">
+          <div class="tl-row"><div class="tl-date">Apr 2026</div><div class="tl-text">Joined <strong>AmazonLabs123</strong> as Senior Verification Engineer, owning SoC &amp; sub-system verification for Security, Clock &amp; Reset, and Always-On blocks.</div></div>
+          <div class="tl-row"><div class="tl-date">2023 – 2026</div><div class="tl-text">At <strong>Qualcomm</strong>, initiated LLM-based stimulus generation and presented 3 initiative ideas for faster coverage closure (stall, OpenSpin, LLM stimulus).</div></div>
+          <div class="tl-row"><div class="tl-date">2024</div><div class="tl-text">Led VVC Transform Engine verification; versatile flow sequences enabled faster RTL debug and surfaced multiple RTL bugs.</div></div>
+          <div class="tl-row"><div class="tl-date">2023</div><div class="tl-text">Managed APV Transform Engine bring-up — identified <strong>4 critical RTL bugs</strong> and <strong>3 C-model bugs</strong> with a random test setup.</div></div>
+          <div class="tl-row"><div class="tl-date">2022</div><div class="tl-text">At <strong>Marvell</strong>, received a recognition award for a prompt critical-priority bug find in the DFT core during the back-end phase.</div></div>
+          <div class="tl-row"><div class="tl-date">2021</div><div class="tl-text">Found 4 critical RTL/VIP bugs in Ethernet via an ECC test plan; trained a team of 15 interns on SystemVerilog testbenches.</div></div>
+          <div class="tl-row"><div class="tl-date">2021</div><div class="tl-text">Completed <strong>M.Tech</strong> in Microelectronics &amp; VLSI Design at IIT Gandhinagar (CPI 8.82/10).</div></div>
         </div>
-        <div class="hero-card-stats">
-          <div><strong>5+</strong><span>Years</span></div>
-          <div><strong>3</strong><span>Companies</span></div>
-          <div><strong>10+</strong><span>Bugs found</span></div>
+
+        <aside>
+          <div class="side-card">
+            <h3>At a glance</h3>
+            <ul>
+              <li>5+ years in ASIC verification</li>
+              <li>Qualcomm · Marvell · AmazonLabs123</li>
+              <li>10+ critical RTL / C-model bugs found</li>
+              <li>UVM TB from scratch, formal &amp; X-prop</li>
+            </ul>
+          </div>
+          <div class="side-card">
+            <h3>Also done</h3>
+            <ul>
+              <li>Teaching Assistant, IIT Gandhinagar</li>
+              <li>NCC 'C' certificate · NSS volunteer</li>
+              <li>Organised Ethical Hacking Workshop, Techxetra 2017</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- INTERESTS -->
+    <section id="interests">
+      <h2>Technical Interests</h2>
+      <p class="sub">Where I focus and what I like working on.</p>
+      <div class="cols">
+        <div class="side-card">
+          <h3>Verification</h3>
+          <ul>
+            <li>UVM / OVM testbench architecture</li>
+            <li>Constrained-random &amp; coverage closure</li>
+            <li>Formal verification (JasperGold) &amp; X-prop</li>
+            <li>LLM-based stimulus generation</li>
+          </ul>
         </div>
-        <ul class="hero-card-list">
-          <li><span class="tick">✓</span> UVM / SystemVerilog TB expert</li>
-          <li><span class="tick">✓</span> Video codec IP verification</li>
-          <li><span class="tick">✓</span> Coverage closure &amp; formal</li>
+        <div class="side-card">
+          <h3>Domains &amp; Tools</h3>
+          <ul>
+            <li>Video codecs: APV, VVC, H.265/264, AV1</li>
+            <li>Protocols: AXI, APB, DVS, I2C, SPI, USB 3.0</li>
+            <li>Languages: SystemVerilog, Verilog, Python, C/C++</li>
+            <li>Tools: Xcelium, VCS, Verdi, IMC, Vmanager</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education">
+      <h2>Education</h2>
+      <table>
+        <thead><tr><th>Degree</th><th>Institute</th><th>Score</th><th>Year</th></tr></thead>
+        <tbody>
+          <tr><td><strong>M.Tech, Microelectronics &amp; VLSI Design</strong></td><td>IIT Gandhinagar</td><td>8.82 / 10</td><td class="when">2019 – 2021</td></tr>
+          <tr><td><strong>B.Tech, Electronics &amp; Communication</strong></td><td>Tezpur University, Assam</td><td>7.87 / 10</td><td class="when">2014 – 2018</td></tr>
+          <tr><td><strong>Class XII</strong></td><td>NSPS, Jamshedpur</td><td>87%</td><td class="when">2012 – 2013</td></tr>
+          <tr><td><strong>Class X</strong></td><td>NSPS, Jamshedpur</td><td>8.6 / 10</td><td class="when">2010 – 2011</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <h2>Work Experience</h2>
+      <div class="exp">
+        <div class="top"><h3>Senior Verification Engineer</h3><span class="when">Apr 2026 — Present</span></div>
+        <p class="co">AmazonLabs123 · Bangalore</p>
+        <ul>
+          <li>Own SoC &amp; sub-system verification for Security, Clock &amp; Reset, and Always-On Misc blocks.</li>
+          <li>Test planning, UVM testbench development, and coverage closure.</li>
+        </ul>
+      </div>
+      <div class="exp">
+        <div class="top"><h3>Lead / Senior Engineer</h3><span class="when">Jun 2023 — Apr 2026</span></div>
+        <p class="co">Qualcomm Inc. · Bangalore</p>
+        <ul>
+          <li>Owned block-level verification for Video IP with H.265, H.264, and AV1 codecs.</li>
+          <li>Led VVC Transform Engine verification; random TB with versatile flow sequences surfaced multiple RTL bugs.</li>
+          <li>Managed APV Transform Engine bring-up; found 4 critical RTL bugs and 3 C-model bugs.</li>
+          <li>Initiated LLM-based stimulus generation; improved formal flow and stall-coverage automation.</li>
+        </ul>
+      </div>
+      <div class="exp">
+        <div class="top"><h3>Senior Verification Engineer</h3><span class="when">Jun 2021 — Jun 2023</span></div>
+        <p class="co">Marvell India Pvt Ltd · Bangalore</p>
+        <ul>
+          <li>UVM TB for Ethernet &amp; PCIe subsystems; found 4 critical RTL/VIP bugs via an ECC test plan.</li>
+          <li>Built DFT core TB from scratch (award-winning critical bug find); SV TB for RISC-V E24 JTAG debug.</li>
+          <li>Verified IP wrappers (eMMC, USB 2.0, UART); wrote assertions for an in-house 5nm test chip.</li>
+          <li>Trained a team of 15 interns on SystemVerilog testbenches.</li>
         </ul>
       </div>
     </section>
 
-    <!-- ============ ABOUT ============ -->
-    <section id="about" class="section">
-      <div class="section-head">
-        <span class="section-tag">01 — About</span>
-        <h2>A bit about me</h2>
-      </div>
-      <div class="about-grid">
-        <p class="about-lead">
-          I'm an ASIC verification engineer who enjoys the puzzle of proving a
-          design is correct before a single wafer is etched. My work spans
-          block- and SoC-level verification of video codec IPs, high-speed
-          protocols, and security and clock/reset subsystems.
-        </p>
-        <p>
-          With an M.Tech in Microelectronics &amp; VLSI Design from IIT
-          Gandhinagar, I've built UVM testbenches from scratch, driven
-          constrained-random and formal coverage closure, and uncovered
-          critical RTL and C-model bugs. Lately I've been exploring LLM-based
-          stimulus generation to make coverage closure faster, and I enjoy
-          mentoring new engineers and improving team automation along the way.
-        </p>
+    <!-- PROJECTS -->
+    <section id="projects">
+      <h2>Academic &amp; Personal Projects</h2>
+      <p class="sub">Selected work from IIT Gandhinagar, Tezpur University, and beyond.</p>
+      <div class="pgrid">
+        <div class="pcard"><span class="yr">2021</span><h3>In-Memory Serial Adders for SRAM</h3><p>RTL design of efficient serial compute circuits for in-memory computing, using the Neural-Cache architecture as a baseline.</p></div>
+        <div class="pcard"><span class="yr">2020 – 2021</span><h3>CNN Inferencing with Approximate Compute</h3><p>Generated and optimized RTL for pre-trained ML models via hls4ml; functional verification in Vivado &amp; Synopsys VCS.</p></div>
+        <div class="pcard"><span class="yr">2020</span><h3>65nm Chip Tapeout — Memory &amp; Processor</h3><p>RTL-to-GDS of a two-stage RISC processor with TMR/GDMR/GF radiation-hardened variants, plus 6T-SRAM array P&amp;R.</p></div>
+        <div class="pcard"><span class="yr">2019</span><h3>3×3 Network-on-Chip Router</h3><p>Designed and integrated arbiter (round-robin), VC allocator, synchronous FIFO, route-compute, and crossbar in Verilog.</p></div>
+        <div class="pcard"><span class="yr">2018</span><h3>Single-Image Super-Resolution CNN</h3><p>Lightweight C++ CNN in Caffe achieving up to 32.5 dB PSNR for an end-to-end super-resolution solution.</p></div>
+        <div class="pcard"><span class="yr">2016</span><h3>Braille Smartphone for the Blind</h3><p>Texas Innovation Challenge 2016 — a BeagleBone Black phone with Braille keys driven by electromagnets.</p></div>
       </div>
     </section>
 
-    <!-- ============ SKILLS ============ -->
-    <section id="skills" class="section">
-      <div class="section-head">
-        <span class="section-tag">02 — Skills</span>
-        <h2>What I work with</h2>
-      </div>
-      <div class="skills-grid">
-        <article class="skill-card glass">
-          <h3>Video Codecs</h3>
-          <ul>
-            <li>APV</li>
-            <li>VVC (H.266)</li>
-            <li>H.265 &amp; H.264</li>
-            <li>AV1</li>
-          </ul>
-        </article>
-        <article class="skill-card glass">
-          <h3>Protocols</h3>
-          <ul>
-            <li>AXI, APB, DVS</li>
-            <li>I2C, SPI</li>
-            <li>USB 3.0</li>
-            <li>PCIe &amp; Ethernet (basic)</li>
-          </ul>
-        </article>
-        <article class="skill-card glass">
-          <h3>HDL &amp; Coding</h3>
-          <ul>
-            <li>SystemVerilog &amp; Verilog</li>
-            <li>UVM &amp; OVM testbenches</li>
-            <li>Python</li>
-            <li>C / C++</li>
-          </ul>
-        </article>
-        <article class="skill-card glass">
-          <h3>Tools</h3>
-          <ul>
-            <li>Xcelium, VCS, Simvision</li>
-            <li>Verdi, IMC, Vmanager</li>
-            <li>JasperGold (formal)</li>
-            <li>Cadence Virtuoso, Innovus</li>
-          </ul>
-        </article>
-      </div>
-    </section>
-
-    <!-- ============ EXPERIENCE ============ -->
-    <section id="experience" class="section">
-      <div class="section-head">
-        <span class="section-tag">03 — Experience</span>
-        <h2>Where I've worked</h2>
-      </div>
-      <div class="timeline">
-        <article class="tl-item glass">
-          <div class="tl-top">
-            <h3>Senior Verification Engineer</h3>
-            <span class="tl-date">Apr 2026 — Present</span>
-          </div>
-          <p class="tl-company">AmazonLabs123 · Bangalore</p>
-          <ul>
-            <li>Own SoC and sub-system verification for Security, Clock &amp; Reset, and Always-On Misc blocks.</li>
-            <li>Test planning, UVM testbench development, and coverage closure.</li>
-          </ul>
-        </article>
-
-        <article class="tl-item glass">
-          <div class="tl-top">
-            <h3>Lead / Senior Engineer</h3>
-            <span class="tl-date">Jun 2023 — Apr 2026</span>
-          </div>
-          <p class="tl-company">Qualcomm Inc. · Bangalore</p>
-          <ul>
-            <li>Owned block-level verification for Video IP with H.265, H.264, and AV1 codecs.</li>
-            <li>Led VVC Transform Engine verification; built random TB with versatile flow sequences that surfaced multiple RTL bugs.</li>
-            <li>Managed APV Transform Engine bring-up; found 4 critical RTL bugs and 3 C-model bugs.</li>
-            <li>Initiated LLM-based stimulus generation and improved formal flow (JasperGold) and stall-coverage automation.</li>
-          </ul>
-        </article>
-
-        <article class="tl-item glass">
-          <div class="tl-top">
-            <h3>Senior Verification Engineer</h3>
-            <span class="tl-date">Jun 2021 — Jun 2023</span>
-          </div>
-          <p class="tl-company">Marvell India Pvt Ltd · Bangalore</p>
-          <ul>
-            <li>UVM TB development for Ethernet and PCIe subsystems; found 4 critical RTL/VIP bugs via an ECC test plan.</li>
-            <li>Built DFT core TB from scratch (award-winning critical bug find) and SV TB for RISC-V E24 JTAG debug.</li>
-            <li>Verified IP wrappers (eMMC, USB 2.0, UART) and wrote assertions for an in-house 5nm test chip.</li>
-          </ul>
-        </article>
-      </div>
-    </section>
-
-    <!-- ============ PROJECTS ============ -->
-    <section id="projects" class="section">
-      <div class="section-head">
-        <span class="section-tag">04 — Projects</span>
-        <h2>Academic &amp; personal work</h2>
-      </div>
-      <div class="projects-grid">
-        <article class="project-card glass">
-          <div class="project-thumb thumb-a" aria-hidden="true"></div>
-          <div class="project-body">
-            <h3>In-Memory Serial Adders for SRAM</h3>
-            <p>RTL design of efficient serial compute circuits for in-memory computing, using the Neural-Cache architecture as a baseline.</p>
-            <div class="tags">
-              <span>RTL</span><span>SRAM</span><span>In-Memory Compute</span>
-            </div>
-            <div class="project-links">
-              <a href="#" class="link-arrow">IIT Gandhinagar <span>→</span></a>
-            </div>
-          </div>
-        </article>
-
-        <article class="project-card glass">
-          <div class="project-thumb thumb-b" aria-hidden="true"></div>
-          <div class="project-body">
-            <h3>CNN Inferencing with Approximate Compute</h3>
-            <p>Generated and optimized RTL for pre-trained ML models via hls4ml, cutting hardware cost with minimal accuracy loss. Verified in Vivado &amp; VCS.</p>
-            <div class="tags">
-              <span>hls4ml</span><span>VCS</span><span>CNN</span>
-            </div>
-            <div class="project-links">
-              <a href="#" class="link-arrow">IIT Gandhinagar <span>→</span></a>
-            </div>
-          </div>
-        </article>
-
-        <article class="project-card glass">
-          <div class="project-thumb thumb-c" aria-hidden="true"></div>
-          <div class="project-body">
-            <h3>65nm Chip Tapeout — Memory &amp; Processor</h3>
-            <p>RTL-to-GDS flow for a two-stage RISC processor with radiation-hardened TMR/GDMR/GF variants, plus P&amp;R of a 6T-SRAM array.</p>
-            <div class="tags">
-              <span>RTL-to-GDS</span><span>Innovus</span><span>65nm</span>
-            </div>
-            <div class="project-links">
-              <a href="#" class="link-arrow">IIT Gandhinagar <span>→</span></a>
-            </div>
-          </div>
-        </article>
-
-        <article class="project-card glass">
-          <div class="project-thumb thumb-a" aria-hidden="true"></div>
-          <div class="project-body">
-            <h3>3×3 Network-on-Chip Router</h3>
-            <p>Designed and integrated arbiter (round-robin), virtual channel allocator, synchronous FIFO, route-compute, and crossbar in Verilog.</p>
-            <div class="tags">
-              <span>Verilog</span><span>NoC</span><span>Arbiter</span>
-            </div>
-            <div class="project-links">
-              <a href="#" class="link-arrow">Details <span>→</span></a>
-            </div>
-          </div>
-        </article>
-
-        <article class="project-card glass">
-          <div class="project-thumb thumb-b" aria-hidden="true"></div>
-          <div class="project-body">
-            <h3>Single-Image Super-Resolution CNN</h3>
-            <p>C++ implementation of a lightweight CNN in Caffe achieving up to 32.5 dB PSNR for an end-to-end super-resolution solution.</p>
-            <div class="tags">
-              <span>C++</span><span>Caffe</span><span>CNN</span>
-            </div>
-            <div class="project-links">
-              <a href="#" class="link-arrow">Tezpur University <span>→</span></a>
-            </div>
-          </div>
-        </article>
-
-        <article class="project-card glass">
-          <div class="project-thumb thumb-c" aria-hidden="true"></div>
-          <div class="project-body">
-            <h3>Braille Smartphone for the Blind</h3>
-            <p>Texas Innovation Challenge 2016 — a BeagleBone Black-based phone with Braille keys driven by electromagnets on the screen.</p>
-            <div class="tags">
-              <span>Embedded</span><span>BeagleBone</span><span>Accessibility</span>
-            </div>
-            <div class="project-links">
-              <a href="#" class="link-arrow">Details <span>→</span></a>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- ============ CONTACT ============ -->
-    <section id="contact" class="section">
-      <div class="section-head">
-        <span class="section-tag">05 — Contact</span>
-        <h2>Let's build something</h2>
-      </div>
-      <div class="contact-wrap glass">
-        <div class="contact-intro">
-          <p>Have a verification challenge, a role, or just want to connect? Drop a message and I'll get back to you.</p>
-          <a class="contact-email" href="mailto:rajesh.pandit931@gmail.com">rajesh.pandit931@gmail.com</a>
-          <p class="contact-phone">+91 99546 88170</p>
+    <!-- CONTACT -->
+    <section id="contact">
+      <h2>Get in touch</h2>
+      <p class="sub">Open to verification roles and collaborations.</p>
+      <div class="contact-box">
+        <a class="mail" href="mailto:rajesh.pandit931@gmail.com">rajesh.pandit931@gmail.com</a>
+        <p style="color:var(--muted);margin-top:8px;">+91 99546 88170 · Bangalore, India</p>
+        <div class="links" style="justify-content:center;margin-top:16px;display:flex;gap:14px;">
+          <a href="https://www.linkedin.com/">LinkedIn</a> ·
+          <a href="https://github.com/">GitHub</a>
         </div>
-        <!--
-          Backend-free form. Point the action at a service like Formspree/Getform,
-          or wire up your own handler. Replace FORM_ENDPOINT below.
-        -->
-        <form class="contact-form" action="FORM_ENDPOINT" method="POST">
-          <div class="field">
-            <label for="name">Name</label>
-            <input id="name" name="name" type="text" required placeholder="Jane Doe" />
-          </div>
-          <div class="field">
-            <label for="email">Email</label>
-            <input id="email" name="email" type="email" required placeholder="jane@email.com" />
-          </div>
-          <div class="field">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" rows="4" required placeholder="Tell me about it..."></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary">Send message</button>
-        </form>
       </div>
     </section>
-  </main>
+  </div>
 
-  <footer class="footer">
-    <p>© <span id="year"></span> Rajesh Kumar. Built from scratch. MIT licensed.</p>
-    <a href="#home" class="to-top">Back to top ↑</a>
-  </footer>
-
-  <script>
-    // ---- Theme toggle (persists choice) ----
-    const root = document.documentElement;
-    const saved = localStorage.getItem("theme");
-    if (saved) root.setAttribute("data-theme", saved);
-
-    document.getElementById("themeToggle").addEventListener("click", () => {
-      const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
-      root.setAttribute("data-theme", next);
-      localStorage.setItem("theme", next);
-    });
-
-    // ---- Mobile menu ----
-    const menuBtn = document.getElementById("menuToggle");
-    const links = document.querySelector(".nav-links");
-    menuBtn.addEventListener("click", () => {
-      const open = links.classList.toggle("open");
-      menuBtn.setAttribute("aria-expanded", String(open));
-    });
-    links.addEventListener("click", (e) => {
-      if (e.target.tagName === "A") {
-        links.classList.remove("open");
-        menuBtn.setAttribute("aria-expanded", "false");
-      }
-    });
-
-    // ---- Reveal on scroll ----
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((en) => {
-        if (en.isIntersecting) {
-          en.target.classList.add("in");
-          io.unobserve(en.target);
-        }
-      });
-    }, { threshold: 0.12 });
-    document.querySelectorAll(".section, .hero-card").forEach((el) => {
-      el.classList.add("reveal");
-      io.observe(el);
-    });
-
-    // ---- Footer year ----
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+  <footer>© <span id="y"></span> Rajesh Kumar · Built from scratch · MIT licensed</footer>
+  <script>document.getElementById("y").textContent = new Date().getFullYear();</script>
 </body>
 </html>
